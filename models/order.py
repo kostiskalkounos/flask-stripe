@@ -1,5 +1,11 @@
+import os
+import stripe
+
 from db import db
 from typing import List
+
+
+CURRENCY = "usd"
 
 
 class ItemsInOrder(db.Model):
@@ -29,6 +35,19 @@ class OrderModel(db.Model):
     @classmethod
     def find_by_id(cls, _id: int) -> "OrderModel":
         return cls.query.filter_by(id=_id).first()
+
+    def charge_with_stripe(self, token: str) -> stripe.Charge:
+        # Set your secret key: remember to change this to your live secret key in production
+
+        # See your keys here: https://dashboard.stripe.com/account/apikeys
+        stripe.api_key = os.getenv("STRIPE_API_KEY")
+
+        return stripe.Charge.create(
+            amount=self.amount, # amount of cents (100 means USD$1.00)
+            currency=CURRENCY,
+            description=self.description,
+            source=token
+        )
 
     def set_status(self, new_status: str) -> None:
         """
