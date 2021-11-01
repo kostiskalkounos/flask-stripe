@@ -3,7 +3,7 @@ from flask_restful import Resource
 
 from libs.strings import gettext
 from models.item import ItemModel
-from models.order import OrderModel, ItemsInOrder
+from models.order import OrderModel
 
 
 class Order(Resource):
@@ -26,3 +26,5 @@ class Order(Resource):
 
         order = OrderModel(items=items, status="pending")
         order.save_to_db()
+
+        order.set_status("something")
