@@ -9,14 +9,15 @@ Flask-JWT-Extended = "*"
 Flask-RESTful = "*"
 Flask-SQLAlchemy = "*"
 flask-marshmallow = "*"
+python-dotenv = "*"
 marshmallow-sqlalchemy = "*"
-marshmallow = "==3.0.0b12"
+marshmallow = "*"
 stripe = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.7"
+python_version = "3.9"
 
 [pipenv]
 allow_prereleases = true

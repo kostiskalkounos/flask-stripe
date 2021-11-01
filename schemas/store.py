@@ -1,10 +1,9 @@
 from ma import ma
 from models.store import StoreModel
-from models.item import ItemModel
 from schemas.item import ItemSchema
 
 
-class StoreSchema(ma.ModelSchema):
+class StoreSchema(ma.SQLAlchemyAutoSchema):
     items = ma.Nested(ItemSchema, many=True)
 
     class Meta:
